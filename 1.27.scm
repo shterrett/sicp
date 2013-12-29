@@ -1,0 +1,17 @@
+(define (expmod base ex m)
+  (cond ((= ex 0) 1)
+        ((even? ex)
+         (remainder (square (expmod base (/ ex 2) m))
+                    m))
+        (else
+          (remainder (* base (expmod base (- ex 1) m))
+                     m))))
+(define (mod-congruent n)
+  (define (mod-congruent-iter x test)
+    (cond ((= test x) true)
+          ((= (expmod test x x) test)
+           (mod-congruent-iter x (+ test 1)))
+          (else false)))
+  (mod-congruent-iter n 1))
+
+(mod-congruent 1729)

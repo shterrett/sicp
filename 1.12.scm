@@ -1,0 +1,13 @@
+(define (pascal row column)
+  (cond ((= row 0) 1)
+        ((= column 0) 1)
+        ((= column row) 1)
+        (else (+ (pascal (- row 1) (- column 1))
+                 (pascal (- row 1) column)))))
+
+(pascal 5 0)
+(pascal 5 1)
+(pascal 5 2)
+(pascal 5 3)
+(pascal 5 4)
+(pascal 5 5)

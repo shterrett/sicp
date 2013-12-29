@@ -1,0 +1,9 @@
+b^n
+(b^2)^(n/2)
+
+ab^n
+a(b^2)^(n/2) => a constant
+
+ab^(n-1) => a = a*b
+
+
