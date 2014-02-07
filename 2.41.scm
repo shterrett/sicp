@@ -1,0 +1,35 @@
+(define (enumerate-interval n)
+  (cond ((= n 0) '())
+        ((= n 1) (list 1))
+        (else (append (enumerate-interval (- n 1)) (list n)))))
+
+(define (accumulate op initial sequence)
+  (if (null? sequence)
+    initial
+    (op (car sequence)
+        (accumulate op initial (cdr sequence)))))
+
+(define (flatmap proc seq)
+  (accumulate append '() (map proc seq)))
+
+(define (triples n)
+  (flatmap (lambda (i)
+             (flatmap (lambda (j)
+                    (map (lambda (k)
+                           (list i j k)
+                           )
+                         (filter (lambda (x)
+                                   (and (not (= i x))
+                                        (not (= j x))))
+                                 (enumerate-interval n)))
+                    )
+                  (filter (lambda (x) (not (= i x))) (enumerate-interval n))))
+           (enumerate-interval n)))
+
+(define (sum-triples sum n)
+  (define (right-sum? t)
+    (= sum (accumulate + 0 t)))
+  (filter right-sum? (triples n)))
+
+(triples 6)
+(sum-triples 6 6)

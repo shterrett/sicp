@@ -1,0 +1,20 @@
+(define (square-tree tree)
+  (cond ((null? tree) '())
+        ((not (pair? tree)) (* tree tree))
+        (else (cons (square-tree (car tree))
+                    (square-tree (cdr tree))))))
+
+(define (map proc items)
+  (if (null? items) '()
+    (cons (proc (car items))
+          (map proc (cdr items)))))
+
+(define (square-tree-map tree)
+  (map (lambda (sub-tree)
+         (if (pair? sub-tree)
+           (square-tree-map sub-tree)
+           (* sub-tree sub-tree)))
+       tree))
+
+(square-tree (list 1 2 3 (list 4 5)))
+(square-tree-map (list 1 2 3 (list 4 5)))
