@@ -1,0 +1,6 @@
+(define (solve-2nd a b dt y0 dy0)
+  (define (y (delay (integral (force dy) y0 dt))))
+  (define (dy (delay (integral (force ddy) dy0 dt))))
+  (define (ddy (force (+ (scale-stream (force dy) a)
+                      (scale-stream (force y) b)))))
+  y)
