@@ -1,2 +1,2 @@
 (define (eval-let exp env)
-  ((make-lambda let-vars let-body) let-exps))
+  ((make-lambda (let-vars exp) (let-body exp)) (let-exps exp)))
