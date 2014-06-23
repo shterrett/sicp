@@ -1,0 +1,5 @@
+(rule (bigshot ?person)
+      (and (supervisor ?underling ?person)
+           (not (and (job ?person (?division . ?title))
+                     (supervisor ?person ?boss)
+                     (job ?boss (?division . ?boss-title))))))
